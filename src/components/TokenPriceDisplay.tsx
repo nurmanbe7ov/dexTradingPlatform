@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { useTokenPrice } from '../hooks/useTokenPrice';
 import { AVAILABLE_CURRENCIES } from '../api/api';
 import { setSelectedPair } from '../store/slices/tokenPriceSlice';
-import type { Token } from '../types/types';
+import type { Token, TokenPriceState } from '../types/types';
 import type { RootState } from '../store/store';
 
 const formatTokenName = (name: string): string => {
@@ -12,7 +12,9 @@ const formatTokenName = (name: string): string => {
 const TokenPriceDisplay = () => {
   const dispatch = useAppDispatch();
   const { selectedPair, tokens } = useTokenPrice();
-  const { price, loading, error } = useAppSelector((state: RootState) => state.tokenPrice);
+  const { price, loading, error } = useAppSelector(
+    (state: RootState) => state.tokenPrice
+  ) as TokenPriceState;
 
   const handleTokenChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setSelectedPair({ ...selectedPair, token: e.target.value }));

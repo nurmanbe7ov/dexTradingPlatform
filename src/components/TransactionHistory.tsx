@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setTransactions, setLoading, setError } from '../store/slices/transactionSlice';
 import type { RootState } from '../store/store';
-import type { Transaction } from '../types/types';
+import type { Transaction, TransactionState } from '../types/types';
 
 const mockTransactions: Transaction[] = [
   {
@@ -33,7 +33,7 @@ const TransactionHistory = () => {
   const dispatch = useAppDispatch();
   const { items: transactions, loading, error } = useAppSelector(
     (state: RootState) => state.transactions
-  );
+  ) as TransactionState;
 
   useEffect(() => {
     const loadTransactions = async () => {

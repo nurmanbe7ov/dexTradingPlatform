@@ -4,22 +4,31 @@ import axios from 'axios';
 
 import type { TokenPriceState, Token } from '../../types/types';
 
-
 export interface TokenPair {
   token: string;
   currency: string;
 }
 
+const popularTokens: Token[] = [
+  { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin' },
+  { id: 'ethereum', symbol: 'ETH', name: 'Ethereum' },
+  { id: 'solana', symbol: 'SOL', name: 'Solana' },
+  { id: 'cardano', symbol: 'ADA', name: 'Cardano' },
+  { id: 'polkadot', symbol: 'DOT', name: 'Polkadot' },
+];
+
+const popularCurrencies = ['USD', 'EUR', 'GBP', 'JPY', 'CNY'];
+
 const initialState: TokenPriceState = {
   selectedPair: {
     token: 'bitcoin',
-    currency: 'usd',
+    currency: 'USD',
   },
   price: null,
   loading: false,
   error: null,
-  tokens: [],
-  currencies: [],
+  tokens: popularTokens,
+  currencies: popularCurrencies,
 };
 
 export const fetchTokenPrice = createAsyncThunk(

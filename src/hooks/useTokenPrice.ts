@@ -3,10 +3,14 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchTokenPrice, fetchPopularTokens } from '../api/api';
 import { setPrice, setLoading, setError, setTokens } from '../store/slices/tokenPriceSlice';
+import type { RootState } from '../store/store';
+import type { TokenPriceState } from '../types/types';
 
 export const useTokenPrice = () => {
   const dispatch = useAppDispatch();
-  const { selectedPair, tokens } = useAppSelector((state) => state.tokenPrice);
+  const { selectedPair, tokens } = useAppSelector(
+    (state: RootState) => state.tokenPrice
+  ) as TokenPriceState;
 
   useEffect(() => {
     const loadTokens = async () => {
