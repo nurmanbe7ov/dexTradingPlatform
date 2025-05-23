@@ -1,54 +1,99 @@
-# React + TypeScript + Vite
+# DEX Trading Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Описание
+DEX Trading Platform - это веб-приложение для отслеживания цен криптовалют в реальном времени. Платформа предоставляет пользователям возможность выбирать различные токен-пары и просматривать их текущие цены, а также историю транзакций.
 
-Currently, two official plugins are available:
+## Технологии
+- **Frontend**: React 18, TypeScript
+- **State Management**: Redux Toolkit
+- **Стилизация**: TailwindCSS
+- **Маршрутизация**: React Router v6
+- **HTTP-клиент**: Axios
+- **API**: CoinGecko API
+- **Сборка**: Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Запуск проекта
 
-## Expanding the ESLint configuration
+### Предварительные требования
+- Node.js (версия 18 или выше)
+- npm (версия 9 или выше)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Установка и запуск
+1. Клонируйте репозиторий:
+```bash
+git clone [url-репозитория]
+cd dexTradingApp
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Установите зависимости:
+```bash
+npm install
 ```
+
+3. Запустите проект в режиме разработки:
+```bash
+npm run dev
+```
+
+4. Откройте [http://localhost:5173](http://localhost:5173) в браузере
+
+### Тестовые данные для входа
+- **Логин**: admin
+- **Пароль**: 1234
+
+## Функциональность
+
+### Авторизация
+- Защищенные маршруты с использованием React Router
+- Хранение состояния авторизации в localStorage
+- Автоматический редирект на страницу входа при отсутствии авторизации
+
+### Отслеживание цен
+- Выбор токена из списка популярных криптовалют
+- Выбор валюты для отображения цены (USD, EUR, GBP, JPY, CNY)
+- Автоматическое обновление цены каждые 5 секунд
+- Динамическое отображение названия токена в заголовке
+- Форматирование цены в соответствии с выбранной валютой
+
+### История транзакций
+- Отображение списка последних транзакций
+- Разделение транзакций по типам (покупка/продажа)
+- Адаптивное отображение на мобильных устройствах
+
+### UI/UX
+- Адаптивный дизайн для всех устройств
+- Анимации загрузки и переходов
+- Информативные сообщения об ошибках
+- Подтверждение выхода из системы
+
+## Структура проекта
+```
+src/
+├── api/              # API-запросы
+│   └── api.ts
+├── components/       # React-компоненты
+│   ├── TokenPriceDisplay.tsx
+│   ├── TransactionHistory.tsx
+│   └── ConfirmModal.tsx
+├── hooks/           # Пользовательские хуки
+│   └── useTokenPrice.ts
+├── pages/           # Страницы приложения
+│   ├── Login.tsx
+│   └── Dashboard.tsx
+├── store/           # Redux store
+│   ├── slices/
+│   │   ├── tokenPriceSlice.ts
+│   │   └── transactionSlice.ts
+│   ├── hooks.ts
+│   └── store.ts
+├── types/           # TypeScript типы
+│   └── types.ts
+├── App.tsx
+└── main.tsx
+```
+
+## Дополнительная информация
+- Проект использует TypeScript для типизации
+- Все компоненты написаны с использованием функционального подхода и хуков
+- Реализована обработка ошибок и состояний загрузки
+- Используется современный стек технологий для оптимальной производительности
